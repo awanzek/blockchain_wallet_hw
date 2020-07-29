@@ -43,7 +43,7 @@ def derive_wallets(mnemonic,coin_list):
         #set wallet key to subprocess command output
         wallet_key=output
         wallet_str=wallet_key.decode("UTF-8")
-
+        wallet=ast.literal_eval(wallet_str)
 
         #append the wallet key list to the walley key dictionary 
         #for the key corresponding to the coin name
@@ -57,7 +57,7 @@ output=derive_wallets(mnemonic, coin_list)
 print(type(output))
 #print(output)
 #btc-test private key
-btc_priv_key=output['btc-test'][2]
+#btc_priv_key=output['btc-test'][2]
 btc_test_address=os.getenv("BTC_ADRESS", "insert address here")
 
 #eth address 
