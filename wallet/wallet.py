@@ -1,5 +1,6 @@
 #import relevant files or libraries
 import os
+import ast
 from constants import *
 import subprocess
 from dotenv import load_dotenv
@@ -47,28 +48,22 @@ def derive_wallets(mnemonic,coin_list):
 
         #append the wallet key list to the walley key dictionary 
         #for the key corresponding to the coin name
-        coin_wallet_dict.update({coin_name:wallet_key})
+        coin_wallet_dict.update({coin_name:wallet})
     return coin_wallet_dict
 
 #run the function on mneumonic and coins list defined
 output=derive_wallets(mnemonic, coin_list)
-#output_json=json.dumps(output)
-#wallets=json.loads(output_json)
-print(type(output))
-#print(output)
+#print(output_json)
+#output the json format to a json file for reference
+#with open("output.json", "w") as f:
+ #   f.write(json.dumps(output))
+
+#grab private key values
 #btc-test private key
-#btc_priv_key=output['btc-test'][2]
-btc_test_address=os.getenv("BTC_ADRESS", "insert address here")
+btc_priv_key=output['btc-test'][0]['privkey']
 
-#eth address 
-eth_address=os.getenv("ETH_ADRESS", "insert address here")
-
-
-
-#read the output in json format
-#result=json.dumps(output)
-#show=json.loads(result)
-#print(output)
+#eth priv_key 
+eth_priv_key=output['eth'][0]['privkey']
 
 
 #function for priv_key_to_account
@@ -83,18 +78,20 @@ def priv_key_to_account(coin,priv_key):
 
 
 
+#address2=output['eth'][1]['address']
+
 #function to create raw transaction with all metadata to transact
 def create_tx(coin,account,to,amount):
     if coin=='eth':
         gasEstimate=w3.eth.estimateGas({
             "from":account.address,
-            "to":recipient,
+            "to":to,
             "value":amount
         })
         
         eth_info={
             "from":account.address,
-            "to":recipient,
+            "to":to,
             "value":amount,
             "gas": gasEstimate,
             "gasPrice":w3.eth.gasPrice,
@@ -103,6 +100,7 @@ def create_tx(coin,account,to,amount):
         return eth_info
     elif coin=='btc-test':
         return bit.PrivateKeyTestnet.prepare_transaction(account.address,[(to,amount,BTC)])
+
 
 #function to sign the transaction and send on designated network
 def send_tx(coin,account,to,amount):
