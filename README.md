@@ -1,6 +1,6 @@
 # blockchain_wallet_hw
 
-In this process we used hd-wallet-derive tool to make unique wallet addresses from a BIP 39 mnemonic phrase using the derive wallets aspect of hd-wallet-derive.
+In this process we used hd-wallet-derive tool to make unique wallet addresses from a BIP 39 mnemonic phrase using the derive wallets aspect of hd-wallet-derive. The wallet address and keys were then used to send test transactions for both bitcoin and ethereum using available python libraries [bit](https://ofek.dev/bit/) (for bitcion functions) and [web3](https://web3py.readthedocs.io/en/latest/) (for ethereum functions).
 
 # Getting HD-WALLET-DERIVE
 The first process was cloning the hd-wallet-derive repository to the directory where the wallets would be made. The following commands were run in terminal to complete the hd-wallet-derive install.
