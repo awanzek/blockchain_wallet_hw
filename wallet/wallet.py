@@ -60,8 +60,8 @@ output=derive_wallets(mnemonic, coin_list)
 
 #print(output_json)
 #output the json format to a json file for reference
-#with open("output.json", "w") as f:
- #   f.write(json.dumps(output))
+with open("output.json", "w") as f:
+    f.write(json.dumps(output))
 
 #grab private key values to check output data reading
 #btc-test private key
@@ -123,7 +123,7 @@ def send_tx(coin,account,to,amount):
         #sign the transaction
         signed_tx=account.sign_transaction(raw_tx)
         #send the transaction
-        return w3.eth.sendRawTransactions(signed_tx.rawTransaction)
+        return w3.eth.sendRawTransaction(signed_tx.rawTransaction)
     elif coin=='btc-test':
         #get raw transaction data
         raw_tx=create_tx(coin,account,to,amount)

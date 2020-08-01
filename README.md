@@ -15,6 +15,12 @@ Using the following command in terminal a sym link was made to directly call the
 
 *ln -s hd-wallet-derive/hd-wallet-derive.php derive*
 
+The results from hd-wallet-derive will appear in a format as can be seen in the output file and the following image. Multiple addresses with private and public keys will be compiled for the BIP39 mnemonic used in the subprocess commans of the wallet python file.
+
+![HD-Wallet-Output](./eth_transaction_screenshots/wallet-derive-results.png)
+
+
+
 # What Does the Wallet Do?
 The wallet that has been created is designed to send and receive crypto currency transactions. It has a BIP39 mnemonic pass phrase that is original to its seed. Using the hd-wallet-derive tools, the wallet was created and it was given an unique address for which a public and private key are provided. The public key or address is what is shared on the network for the wallet to send or recieve a transaction. The private key is what is used to digitally sign and confirm the transaction can be sent from the wallet when sending.
 
@@ -69,6 +75,38 @@ which allows you to view the balance and transactions of the bitcoin testnet. Th
 
 ### ETH Test Transaction
 
+* Fund Account 1
+Fund the first eth_account1 either by setting up a new testnet using geth and including it in the accounts to prefund or by sending funds from an account on an existing testnet. Once you can see you have funds in the eth_account1 you are ready to send from that account.
 
+If adding an address to an existing testnet json file it will look like this, add 1 address along with the 2 node addresses.
+
+![ETH_prefund](./eth_transaction_screenshots/add_new_eth_address_to_testnet18.png)
+
+If using existing testnet. The nodes must also be reinitialized with the updated .json information.
+
+![ETH_init1](./eth_transaction_screenshots/init_node1.png)
+
+![ETH_init2](./eth_transaction_screenshots/init_node2.png)
+
+* Send a transaction for getting gas set. 
+
+For ethereum ot get the gas function to work properly send a transactino between the testnet nodes or to the eth_account1 to get it initialized. 
+
+* Send a Transaction from Account 1 to Account 2
+
+In order to send tranactions the wallet.py function file needs to be called within the wallet folder.
+In a terminal the following commands can be run.
+First the entire content of the wallet.py file must be imported to the python interface in the terminal. 
+Then to send a transaction call the send_tx function and input ethereum as the coin, and eth_account1 and eth_account 2. We can see here a transaction set for 3 ETH.
+
+![ETH_transaction](./eth_transaction_screenshots/send_tx_eth.png)
+
+The output showing is a hex code for the txid (transaction id). This transaction id can be put into mycrypto as follows to check the transaction.
+
+![ETH_transaction_txid](./eth_transaction_screenshots/check_tx_status.png)
+
+![ETH_transaction_status](./eth_transaction_screenshots/eth_transaction.png)
+
+Here we can see the transaction was sent to the testnet and sent properly from eth_account1 address to eth_account 2 address for 3 ETH (although this is shown in wei here).
 
 
