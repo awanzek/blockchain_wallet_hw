@@ -121,7 +121,7 @@ def send_tx(coin,account,to,amount):
         #get raw transaction data
         raw_tx=create_tx(coin,account,to,amount)
         #sign the transaction
-        signed_tx=w3.eth.account.sign_transaction(raw_tx)
+        signed_tx=account.sign_transaction(raw_tx)
         #send the transaction
         return w3.eth.sendRawTransactions(signed_tx.rawTransaction)
     elif coin=='btc-test':
